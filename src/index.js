@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import registerServiceWorker from './registerServiceWorker'
 
 class MyComponent extends React.Component {
   state = {
@@ -13,16 +13,40 @@ class MyComponent extends React.Component {
       this.setState({
         shouldReturnNULL: true
       })
-    }, 5000);
+    }, 5000)
   }
-  
+
   render() {
-    if (this.state.shouldReturnNULL) return null;
+    if (this.state.shouldReturnNULL) return null
     return <App />
   }
 }
 
-ReactDOM.render(<App breakpoint={200}/>, document.getElementById('root'));
-ReactDOM.render(<MyComponent />, document.getElementById('root2'));
+const Container = (props) =>  {
+  console.log(props.children(100))
+  return (
+    <div className="container">
+      <h1>Header </h1>
+      <div className="body">
+        {props.children(100)}
+      </div>
+    </div>
+  )
+}
 
-registerServiceWorker();
+const About = () => (
+  <div className="about">
+    <Container>
+      {
+        (width) => {
+          return <div className="hehe">ÁDasdasdadas {width}</div>
+        }
+      }
+    </Container>
+  </div>
+)
+
+ReactDOM.render(<App breakpoint={200}/>, document.getElementById('root2'));
+// ReactDOM.render(<About />, document.getElementById('root2'))
+
+registerServiceWorker()
